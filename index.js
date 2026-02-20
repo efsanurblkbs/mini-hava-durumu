@@ -1,42 +1,58 @@
 import readline from 'readline';
-import fs from 'fs'; // 1. Dosya sistemi modülünü çağırdık
+import fs from 'fs';
+import axios from 'axios'; // Yeni yardımcımız
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-// Log tutma fonksiyonu (Mala anlatır gibi: Bu fonksiyon dosyaya yazı yazar)
+// !!! BURAYA KENDİ API KEY'İNİ YAPIŞTIR !!!
+const API_KEY = '9e2b40a6f49d3ef5c10ba3f356b12e3c'; 
+
 const logKaydet = (sehir, derece) => {
-    const tarih = new Date().toLocaleString(); // O anki tarih ve saati al
-    const mesaj = `[${tarih}] Şehir: ${sehir}, Sıcaklık: ${derece}°C\n`;
-
-    // 'history.txt' dosyasına ekleme yapıyoruz (appendFile)
-    fs.appendFile('history.txt', mesaj, (err) => {
-        if (err) console.log("Hata: Log yazılamadı!");
-    });
+    const tarih = new Date().toLocaleString();
+    const mesaj = `[${tarih}] Şehir: ${sehir}, Gerçek Sıcaklık: ${derece}°C\n`;
+    fs.appendFile('history.txt', mesaj, () => {});
 };
 
-console.log("--- 🌦️  Hava Durumu Kayıt Sistemi ---");
-
-const tavsiyeVer = () => {
-    rl.question('Lütfen bir şehir adı gir (Çıkış için q): ', (sehir) => {
+const havaDurumuGetir = async (sehir) => {
+    try {
+        // İnternete gidip veriyi istediğimiz an:
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${sehir}&appid=${API_KEY}&units=metric&lang=tr`;
+        const cevap = await axios.get(url);
         
-        if (sehir.toLowerCase() === 'q') {
-            console.log("Görüşürüz dostum! Kayıtlar history.txt dosyasına saklandı.");
+        const derece = cevap.data.main.temp;
+        const durum = cevap.data.weather[0].description;
+
+        console.log(`\n🌍 ${sehir.toUpperCase()} İÇİN DURUM:`);
+        console.log(`🌡️  Sıcaklık: ${derece}°C`);
+        console.log(`☁️  Gökyüzü: ${durum}`);
+
+        // Tavsiye Motoru
+        if (derece < 15) console.log("🧣 Tavsiye: Gerçekten soğuk, sıkı giyin!");
+        else console.log("👕 Tavsiye: Hava güzel, tadını çıkar.");
+
+        logKaydet(sehir, derece);
+
+    } catch (error) {
+        // GEREKSİNİM 4: Hata Yönetimi (Error Handling)
+        console.log("❌ Hata: Şehir bulunamadı veya internet bağlantısı yok.");
+    } finally {
+        soruSor(); // İşlem bitince tekrar sor
+    }
+};
+
+const soruSor = () => {
+    rl.question('\nHangi şehri öğrenmek istersin? (Çıkış: q): ', (cevap) => {
+        if (cevap.toLowerCase() === 'q') {
+            console.log("Görüşürüz dostum!");
             rl.close();
-            return;
+        } else {
+            havaDurumuGetir(cevap);
         }
-
-        const sicaklik = Math.floor(Math.random() * 40);
-        console.log(`\n🌡️  ${sehir} için sıcaklık: ${sicaklik}°C`);
-
-        // Loglama fonksiyonunu burada çağırıyoruz
-        logKaydet(sehir, sicaklik);
-
-        console.log("✅ İşlem kaydedildi. Başka bir şehir?\n");
-        tavsiyeVer();
     });
 };
 
-tavsiyeVer();
+console.log("--- 📡 CANLI HAVA DURUMU SİSTEMİ BAŞLADI ---");
+soruSor();
