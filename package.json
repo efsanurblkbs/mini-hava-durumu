@@ -1,0 +1,9 @@
+{
+  "name": "mini-hava-durumu",
+  "version": "1.0.0",
+  "description": "Basit bir hava durumu tavsiye uygulaması",
+  "main": "index.js",
+  "type": "module",
+  "author": "Senin Adın",
+  "license": "ISC"
+}
