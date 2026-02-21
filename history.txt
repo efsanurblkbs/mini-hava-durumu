@@ -1,3 +1,4 @@
 [20.02.2026 22:54:50] Şehir: ısparta, Sıcaklık: 26°C
 [20.02.2026 22:55:00] Şehir: ankara, Sıcaklık: 29°C
 [20.02.2026 22:55:06] Şehir: istanbul, Sıcaklık: 22°C
+[21.02.2026 11:02:37] Şehir: London, Sıcaklık: 9.95°C

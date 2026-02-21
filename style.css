@@ -1,0 +1,19 @@
+body {
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+input { padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
+button { padding: 10px 20px; border-radius: 5px; background: #6c63ff; color: white; border: none; cursor: pointer; }
+.hidden { display: none; }

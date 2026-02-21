@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hava Durumu Dostu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="card">
+    <h2>🌦️ Hava Durumu</h2>
+    <input type="text" id="cityInput" placeholder="Şehir yaz...">
+    <button id="getWeather">Sorgula</button>
+
+    <div id="result" style="display: none; margin-top: 20px;">
+        <h1 id="temp">--°C</h1>
+        <p id="desc">Durum</p>
+        <div id="advice" style="background: #f0f0ff; padding: 10px; border-radius: 10px;">
+            Tavsiyen burada görünecek.
+        </div>
+    </div>
+</div>
+    <script src="app.js"></script>
+</body>
+</html>
