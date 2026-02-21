@@ -5,40 +5,67 @@ document.getElementById('getWeather').onclick = async () => {
     const resultDiv = document.getElementById('result');
     
     if (!sehir) {
-        alert("Boş bırakma aşko, bir şehir yaz!");
+        alert("Aşko şehir ismini unuttun!");
         return;
     }
 
     try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${sehir}&appid=${API_KEY}&units=metric&lang=tr`;
-        const cevap = await fetch(url);
-        const veri = await cevap.json();
+        // 1. Anlık Hava Durumu Verisi
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${sehir}&appid=${API_KEY}&units=metric&lang=tr`);
+        const data = await res.json();
 
-        if (veri.cod !== 200) {
-            alert("Şehir bulunamadı, doğru yazdığına emin misin?");
-            return;
+        if (data.cod !== 200) throw new Error("Şehir bulunamadı");
+
+        // 2. 5 Günlük Tahmin Verisi
+        const fRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${sehir}&appid=${API_KEY}&units=metric&lang=tr`);
+        const fData = await fRes.json();
+
+        // Ekranı Güncelle
+        document.getElementById('temp').innerText = Math.round(data.main.temp) + "°C";
+        document.getElementById('desc').innerText = data.weather[0].description.toUpperCase();
+        
+        // Tavsiye Belirle
+        let tavsiye = "";
+        const temp = data.main.temp;
+        if (temp < 10) tavsiye = "❄️ Hava buz! Kalın bir şeyler giy aşko.";
+        else if (temp < 20) tavsiye = "⛅ Hafif serin, üzerine bir hırka al.";
+        else tavsiye = "☀️ Hava mis! Güneş gözlüğünü unutma.";
+        document.getElementById('advice').innerText = tavsiye;
+
+        // Arka Planı Değiştir
+        arkaPlaniGuncelle(data.weather[0].main);
+
+        // Tahmin Kartlarını Oluştur
+        const forecastDiv = document.getElementById('forecast');
+        forecastDiv.innerHTML = ""; 
+        for (let i = 7; i < fData.list.length; i += 8) {
+            const gun = fData.list[i];
+            const tarih = new Date(gun.dt_txt).toLocaleDateString('tr-TR', { weekday: 'short' });
+            forecastDiv.innerHTML += `
+                <div class="forecast-card">
+                    <div>${tarih}</div>
+                    <img src="http://openweathermap.org/img/wn/${gun.weather[0].icon}.png" width="35">
+                    <strong>${Math.round(gun.main.temp)}°</strong>
+                </div>
+            `;
         }
 
-        // 1. Dereceyi yazdır
-        document.getElementById('temp').innerText = Math.round(veri.main.temp) + "°C";
-        
-        // 2. Durumu yazdır (Güneşli, Parçalı Bulutlu vb.)
-        document.getElementById('desc').innerText = veri.weather[0].description.toUpperCase();
-        
-        // 3. Tavsiyeyi güncelle
-        let tavsiye = "";
-        const derece = veri.main.temp;
-        if (derece < 15) tavsiye = "🧣 Hava buz gibi, sıkı giyin tatlım!";
-        else if (derece < 25) tavsiye = "👕 Tam gezmelik hava, tadını çıkar!";
-        else tavsiye = "🍦 Yanıyoruz! Hemen bir dondurma al.";
-
-        document.getElementById('advice').innerText = tavsiye;
-        
-        // 4. SONUÇ PANELİNİ GÖRÜNÜR YAP (En önemli kısım burası!)
         resultDiv.style.display = "block";
 
     } catch (error) {
-        console.error(error);
-        alert("İnternetinde veya API'de bir sorun var!");
+        alert("Hata: " + error.message);
     }
 };
+
+function arkaPlaniGuncelle(durum) {
+    let renk = "";
+    switch(durum) {
+        case 'Clear': renk = "linear-gradient(135deg, #FFD194, #D1913C)"; break; // Güneşli
+        case 'Clouds': renk = "linear-gradient(135deg, #bdc3c7, #2c3e50)"; break; // Bulutlu
+        case 'Rain': 
+        case 'Drizzle': renk = "linear-gradient(135deg, #4b6cb7, #182848)"; break; // Yağmurlu
+        case 'Snow': renk = "linear-gradient(135deg, #E0EAFC, #CFDEF3)"; break; // Karlı
+        default: renk = "linear-gradient(135deg, #74ebd5, #acb6e5)";
+    }
+    document.body.style.background = renk;
+}
