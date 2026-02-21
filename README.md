@@ -1,27 +1,22 @@
-# 🌦️ Hava Durumu Uygulaması (Weather App)
+# 🌦️ Hava Durumu Pro Max
 
-Bu proje, kullanıcının girdiği şehre göre gerçek zamanlı hava durumu verilerini çeken ve kullanıcıya o havaya uygun tavsiyelerde bulunan bir web uygulamasıdır.
+Bu uygulama, kullanıcının hem manuel şehir araması yapabildiği hem de konum izniyle anlık hava durumunu ve 5 günlük tahminleri görebildiği modern bir web platformudur.
 
-## 🚀 Canlı Demo
-Uygulamayı tarayıcıda denemek için tıklayın: [Canlı Uygulama Linki]
-https://efsanurblkbs.github.io/mini-hava-durumu/
+## 🚀 Canlı Önizleme
+Uygulamayı anlık olarak denemek için buraya tıkla:
+👉 **[Hava Durumu Uygulamasını Çalıştır](https://efsanurblkbs.github.io/mini-hava-durumu/)**
 
-## ✨ Özellikler
-- **Gerçek Zamanlı Veri:** OpenWeatherMap API kullanılarak anlık bilgiler çekilir.
-- **Akıllı Tavsiyeler:** Sıcaklık değerine göre (soğuk, ılık, sıcak) özel tavsiyeler verir.
-- **Responsive Tasarım:** Hem masaüstü hem mobil uyumlu, şık bir arayüz.
-- **Hata Yönetimi:** Geçersiz şehir girişlerinde veya bağlantı sorunlarında kullanıcıyı bilgilendirir.
+## ✨ Öne Çıkan Özellikler
+
+* **📍 Akıllı Konum Desteği:** `Geolocation API` sayesinde konumunuzu şak diye bulur.
+* **🎨 Dinamik Arka Plan:** Hava durumunun ruhuna göre rengini değiştirir (Güneşli, Bulutlu, Yağmurlu vb.).
+* **📅 5 Günlük Tahmin:** Önünüzdeki günlerin planını yapmanız için detaylı tahminler sunar.
+* **📱 Tam Uyum (Responsive):** MacBook Safari dahil tüm tarayıcılarda kusursuz çalışır.
 
 ## 🛠️ Kullanılan Teknolojiler
-- **HTML5:** Sayfa yapısı.
-- **CSS3:** Görsel tasarım ve gradyan arka plan.
-- **JavaScript (ES6+):** API entegrasyonu ve dinamik içerik yönetimi.
-- **Node.js:** Proje geliştirme aşamasındaki terminal süreçleri için.
 
-## 📖 Nasıl Çalıştırılır?
-1. Bu projeyi bilgisayarınıza indirin (clone).
-2. `index.html` dosyasını tarayıcınızda açın.
-3. Şehir adını yazıp "Sorgula" butonuna basın!
+* **HTML5 & CSS3**
+* **JavaScript (Fetch API, Async/Await)**
+* **OpenWeatherMap API**
 
----
-*Bu proje bir yazılım yolculuğunun ilk ve en değerli adımıdır.* ✨
+
