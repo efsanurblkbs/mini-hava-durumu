@@ -1,12 +1,12 @@
 body {
     background: linear-gradient(135deg, #74ebd5, #acb6e5);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    transition: background 0.8s ease; /* Renk geçişi yumuşak olsun */
+    transition: background 0.8s ease;
 }
 
 .card {
@@ -15,14 +15,14 @@ body {
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     text-align: center;
-    width: 350px;
+    width: 380px;
     backdrop-filter: blur(10px);
 }
 
 .search-box {
     margin-bottom: 20px;
     display: flex;
-    gap: 5px;
+    gap: 8px;
 }
 
 input {
@@ -37,13 +37,13 @@ button {
     background: #6c63ff;
     color: white;
     border: none;
-    padding: 12px 15px;
+    padding: 12px;
     border-radius: 12px;
     cursor: pointer;
     font-weight: bold;
 }
 
-button:hover { background: #5149d1; }
+#getLocation { background: #4CAF50; }
 
 .advice-box {
     margin: 15px 0;
@@ -51,13 +51,12 @@ button:hover { background: #5149d1; }
     background: #f0f0ff;
     border-radius: 15px;
     font-size: 0.9rem;
-    color: #444;
 }
 
 .forecast-container {
     display: flex;
     justify-content: space-between;
-    gap: 8px;
+    gap: 5px;
     margin-top: 10px;
 }
 
@@ -66,12 +65,7 @@ button:hover { background: #5149d1; }
     padding: 8px;
     border-radius: 10px;
     flex: 1;
-    font-size: 0.75rem;
-}
-
-.forecast-card img {
-    display: block;
-    margin: 0 auto;
+    font-size: 0.7rem;
 }
 
 hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }

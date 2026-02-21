@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hava Durumu Pro</title>
+    <title>Hava Durumu Pro Max</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="card">
         <h2>🌦️ Hava Durumu</h2>
         <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Şehir adını yaz...">
-            <button id="getWeather">Sorgula</button>
+            <input type="text" id="cityInput" placeholder="Şehir yaz...">
+            <button id="getWeather">Ara</button>
+            <button id="getLocation" title="Konumumu Bul">📍</button>
         </div>
 
         <div id="result" style="display: none;">
+            <img id="mainIcon" src="" alt="Hava İkonu" style="width: 100px;">
             <h1 id="temp">--°C</h1>
             <p id="desc">DURUM</p>
             
