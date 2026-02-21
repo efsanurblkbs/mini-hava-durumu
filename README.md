@@ -1,4 +1,4 @@
-# 🌦️ Hava Durumu Pro Max
+# 🌦️ Hava Durumu 
 
 Bu uygulama, kullanıcının hem manuel şehir araması yapabildiği hem de konum izniyle anlık hava durumunu ve 5 günlük tahminleri görebildiği modern bir web platformudur.
 
